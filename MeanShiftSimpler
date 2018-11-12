@@ -1,0 +1,40 @@
+import pandas as pd 
+import matplotlib.pyplot as plt 
+import numpy as np 
+import csv
+from sklearn.cluster import MeanShift
+
+df = pd.read_csv('MTData2.csv')
+x = np.array(df)
+clustering = MeanShift(bandwidth=2).fit(x)
+labels = clustering.labels_
+cluster_centers = clustering.cluster_centers_
+
+labels_unique = np.unique(labels)
+n_clusters_ = len(labels_unique)
+
+print("number of estimated clusters : %d" % n_clusters_)
+
+colors = ['r','g','b','c','k','y','m']
+
+for i in range(len(x)):
+    plt.scatter(x[i,0], x[i,1], c=colors[labels[i]], marker='*')
+
+plt.scatter(cluster_centers[:,0],cluster_centers[:,1], marker="x",color='k')
+
+plt.show()
+#_______________________________________________________________________________
+# for a 3D visualization
+#from mpl_toolkits.mplot3d import Axes3D
+#colors = ['r','g','b','c','k','y','m']
+#fig = plt.figure()
+#ax = fig.add_subplot(111, projection='3d')
+
+#for i in range(len(x)):
+#    ax.scatter(x[i,0], x[i,1], c=colors[labels[i]], marker='o')
+
+#ax.scatter(cluster_centers[:,0],cluster_centers[:,1],
+#            marker="x",color='k')
+
+#plt.show()
+#plt.show()
