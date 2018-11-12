@@ -2,10 +2,10 @@ import pandas as pd
 import matplotlib.pyplot as plt 
 import numpy as np 
 import csv
-
-df = pd.read_csv('MTdata.csv')
-
 from sklearn.cluster import MeanShift
+
+df = pd.read_csv('MTData2.csv')
+x = np.array(df)
 
 clustering = MeanShift(bandwidth=2).fit(x)
 labels = clustering.labels_
